@@ -92,4 +92,4 @@ You can try to decode the header & payload of the JWT token:
 + [mozilla | Base64 To ASCII](https://developer.mozilla.org/en-US/docs/Web/API/WindowBase64/Base64_encoding_and_decoding)
 + [Baeldung | Generating RSA Keys](http://www.baeldung.com/spring-security-oauth-jwt)
 + [Critical vulnerabilities in JSON Web Token libraries](https://www.chosenplaintext.ca/2015/03/31/jwt-algorithm-confusion.html)
-+ [Spring Security | EnableGlobalMethodSecurity]([reference](http://docs.spring.io/spring-security/site/docs/4.1.1.RELEASE/reference/htmlsingle/#enableglobalmethodsecurity))
++ [Spring Security | EnableGlobalMethodSecurity](http://docs.spring.io/spring-security/site/docs/4.1.1.RELEASE/reference/htmlsingle/#enableglobalmethodsecurity)
