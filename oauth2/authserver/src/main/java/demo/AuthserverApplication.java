@@ -21,21 +21,15 @@ import org.springframework.security.oauth2.config.annotation.web.configurers.Aut
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerSecurityConfigurer;
 import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
 import org.springframework.security.oauth2.provider.token.store.KeyStoreKeyFactory;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 
 @SpringBootApplication
-@Controller
 @EnableResourceServer
+@EnableGlobalMethodSecurity(securedEnabled = true)
 public class AuthserverApplication extends WebMvcConfigurerAdapter {
-
-	@RequestMapping("/user")
-	@ResponseBody
-	public Principal user(Principal user) {
-		return user;
-	}
 
 	public static void main(String[] args) {
 		SpringApplication.run(AuthserverApplication.class, args);
@@ -46,7 +40,7 @@ public class AuthserverApplication extends WebMvcConfigurerAdapter {
 
 	    @Override
 	    protected void configure(HttpSecurity http) throws Exception {
-		http.csrf().disable();
+			http.authorizeRequests().antMatchers("/**").permitAll().and().csrf().disable();
 	    }
 	    
 	    @Autowired
