@@ -7,16 +7,14 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableResourceServer;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
+import org.springframework.security.access.annotation.Secured;
+import java.security.Principal;
 
 @SpringBootApplication
-@RestController
 @EnableResourceServer
+@EnableGlobalMethodSecurity(securedEnabled = true)
 public class ResourceApplication {
-
-	@RequestMapping("/")
-	public Message home() {
-		return new Message("Hello World");
-	}
 
 	public static void main(String[] args) {
 		SpringApplication.run(ResourceApplication.class, args);
@@ -24,22 +22,17 @@ public class ResourceApplication {
 
 }
 
-class Message {
-	private String id = UUID.randomUUID().toString();
-	private String content;
-
-	Message() {
-	}
-
-	public Message(String content) {
-		this.content = content;
-	}
-
-	public String getId() {
-		return id;
-	}
-
-	public String getContent() {
-		return content;
-	}
+@RestController
+class Controller {
+    @RequestMapping("/user")
+    @Secured("ROLE_USER")
+    public Principal home(Principal user) {
+        return user;
+    }
+        
+    @RequestMapping("/admin")
+    @Secured("ROLE_ADMIN")
+    public Principal admin(Principal user) {
+        return user;
+    }
 }
