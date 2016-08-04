@@ -73,7 +73,7 @@ public class AuthserverApplication extends WebMvcConfigurerAdapter {
 			//TODO: clients.withClientDetails(...);
 			clients.inMemory()
 					.withClient("acme")
-					.secret("acmesecret")
+					.secret("") //https://tools.ietf.org/html/rfc6749#section-2.3.1
 					.authorizedGrantTypes("authorization_code", "refresh_token",
 							"password").scopes("openid");
 		}
@@ -88,6 +88,12 @@ public class AuthserverApplication extends WebMvcConfigurerAdapter {
 		@Override
 		public void configure(AuthorizationServerSecurityConfigurer oauthServer)
 				throws Exception {
+			/*
+	    	"The authorization server MAY support including the
+   client credentials in the request-body"
+   			see https://tools.ietf.org/html/rfc6749#section-2.3.1
+	    	*/
+	    	oauthServer.allowFormAuthenticationForClients();
 			oauthServer.tokenKeyAccess("permitAll()").checkTokenAccess(
 					"isAuthenticated()");
 		}
