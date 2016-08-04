@@ -55,9 +55,8 @@ You can try [RO Password Credentials](https://tools.ietf.org/html/rfc6749#sectio
 ```
 var xhr = new XMLHttpRequest();
 xhr.open("POST", "http://localhost:9999/uaa/oauth/token");
-xhr.setRequestHeader("authorization", "Basic " + btoa('acme:acmesecret'));
 xhr.setRequestHeader("content-type", "application/x-www-form-urlencoded");
-xhr.send("grant_type=password&client_id=acme&scope=openid&username=user&password=password&client_secret=acmesecret");
+xhr.send("grant_type=password&client_id=acme&scope=openid&username=user&password=password");
 ```
 You can try to decode the header & payload of the JWT token:
 ```
